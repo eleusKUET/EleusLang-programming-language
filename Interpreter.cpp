@@ -282,26 +282,9 @@ void input_action(vector<string> ins)
 	variables[ins[1]] = strip(variables[ins[1]]);
 }
 
-signed main(int argc, char *argv)
+void run_this_program(vector<string> program)
 {
-	ifstream inf("program.txt");
-
-	vector<string> program;
-
-	string input;
-
-	while (getline(inf, input)) {
-        //debug(input);
-        if (input.size() == 0) continue;
-        program.push_back(strip(input));
-		// debug(strip(input));
-		if (program.size() && program.back() == "end") {
-			program.pop_back();
-			break;
-		}
-	}
-
-	// debug(program);
+    // debug(program);
 
 	for (int ip = 0; ip < program.size(); ip++) {
 		auto ins = decode(program[ip]);
@@ -353,4 +336,52 @@ signed main(int argc, char *argv)
 			exit(0);
 		}
 	}
+}
+
+bool is_correct_file(char *file)
+{
+    string f = file;
+    f = strip(f);
+    reverse(f.begin(), f.end());
+    if (f.size() < 7) {
+        cout << "file name incorrect\n";
+        return false;
+    }
+    string ext = f.substr(0, 6);
+    if (ext == "gnale.") {
+        return true;
+    }
+    cout << "file extension must be .elang\n";
+    return false;
+}
+
+signed main(int argc, char **argv)
+{
+    if (argc > 2) {
+        cout << "Too many arguments.!\n";
+        return 0;
+    }
+    if (argc == 1) {
+        cout << "File name missing\n";
+        return 0;
+    }
+    if (!is_correct_file(argv[1])) {
+        return 0;
+    }
+	ifstream inf(argv[1]);
+
+	if (inf.fail()) {
+        cout << "No such files or directory\n";
+        return 0;
+	}
+
+	vector<string> program;
+	string input;
+
+	while (getline(inf, input)) {
+        if (input.size() == 0) continue;
+        program.push_back(strip(input));
+	}
+
+	run_this_program(program);
 }
