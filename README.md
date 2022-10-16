@@ -21,4 +21,13 @@ mul a, b
 ```
 div a, b
 ```
+```
+jmp here
+```
+jmp keyword is used to jump where level "here" is declared
 
+To declare a level use "lvl" keyword
+```
+lvl here:
+  do some stuff
+```
