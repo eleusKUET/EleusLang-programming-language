@@ -1,0 +1,31 @@
+out "Enter a number:"
+cin num
+
+mov a, 2
+
+lvl check_prime:
+    cmp a >= num
+    jmp exit
+
+    mov b, num
+    rem b, a
+
+    cmp b == 0
+    jmp not_prime
+
+    add a, 1
+    jmp check_prime
+
+lvl exit:
+
+out num
+out " is a prime"
+out NEW_LINE
+
+ret
+
+lvl not_prime:
+    out num
+    out " is not a prime"
+    out NEW_LINE
+    ret
