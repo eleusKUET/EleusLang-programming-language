@@ -7,5 +7,18 @@ Variables are dynamically typed. You don't need to declare it. Just use it.
 ```
 mov a, b
 ```
-It means move the data of a to b variable
+It means move the data of a to b variable. If varible a and b is still not created. Then it will be created immediately.
+similar instractions are:
+```
+add a, b
+```
+```
+sub a, b
+```
+```
+mul a, b
+```
+```
+div a, b
+```
 
